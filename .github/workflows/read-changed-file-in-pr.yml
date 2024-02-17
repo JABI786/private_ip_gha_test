@@ -28,7 +28,7 @@ jobs:
       - name: set env variabless
         #env:
         #  FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
-        run: echo "FILES_CHANGE=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})" >> $GITHUB_ENV
+        run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})" >> $GITHUB_ENV
         #echo "Files changed: $FILES_CHANGED"         
         shell: bash
 
