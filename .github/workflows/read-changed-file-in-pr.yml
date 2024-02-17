@@ -25,16 +25,16 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Get changed files
-        id: get_files
-        env:
-          FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
-        run: |
-          echo "Files changed: $FILES_CHANGED"         
+      - name: set env variabless
+        #env:
+        #  FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
+        run: echo "FILES_CHANGE=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})" >> $GITHUB_ENV
+        #echo "Files changed: $FILES_CHANGED"         
         shell: bash
 
       - name: Run pr changed files script
         run: |
+          echo "Files changed: $FILES_CHANGED
           files=$(echo "${FILES_CHANGED}" | tr '\n' ' ')
           ./print-pr-files-changed-full.py $files
           ./hello-world.py
