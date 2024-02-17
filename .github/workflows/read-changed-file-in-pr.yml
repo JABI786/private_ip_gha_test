@@ -37,4 +37,5 @@ jobs:
         run: |
           files=$(echo "${FILES_CHANGED}" | tr '\n' ' ')
           ./print-pr-files-changed-full.py $files
+          ./hello-world.py
         shell: bash
