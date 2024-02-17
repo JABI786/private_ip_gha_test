@@ -26,7 +26,8 @@ jobs:
         id: get_files
         env:
           FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
-        run: echo "Files changed: $FILES_CHANGED"         
+        run: |
+          echo "Files changed: $FILES_CHANGED"         
         shell: bash
 
       - name: Run pr changed files script
