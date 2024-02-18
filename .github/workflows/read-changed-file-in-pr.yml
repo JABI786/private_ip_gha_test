@@ -26,7 +26,7 @@ jobs:
           python-version: '3.x'
 
       - name: set env variabless
-        run: echo "FILES_CHANGED=$(git log -2 )" >> $GITHUB_ENV
+        run: echo "FILES_CHANGED=$(git log -10 --oneline | cut -d' ' -f1)" >> $GITHUB_ENV
         #env:
         #  FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
         #run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})" >> $GITHUB_ENV
