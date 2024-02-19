@@ -32,8 +32,8 @@ jobs:
         #  git log -10 --oneline | cut -d' ' -f1
         #  git diff --name-only ${{ github.event.before }} ${{ github.sha }}
         #run: echo "FILES_CHANGED=$(git log -10 --oneline | cut -d' ' -f1)" >> $GITHUB_ENV
-        env:
-          FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
+        #env:
+        #  FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
         run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | tr '\n' ' ')" >> $GITHUB_ENV
         shell: bash
 
