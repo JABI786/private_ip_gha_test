@@ -4,7 +4,7 @@ import sys
 
 def print_full_file_contents(file_path):
   if file_path.endswith(".sls"):  
-    with open(file_path, 'r') as f:
+    with open("../" + file_path, 'r') as f:
         lines = f.readlines()
         for line_number, line in enumerate(lines, start=0):
             print(f"{line_number}    {line}")
