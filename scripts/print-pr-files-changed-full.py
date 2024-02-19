@@ -3,7 +3,7 @@ import sys
 #import difflib
 
 def print_full_file_contents(file_path):
-  if not file_path.startswith(".github"):  
+  if file_path.endswith(".sls"):  
     with open(file_path, 'r') as f:
         lines = f.readlines()
         for line_number, line in enumerate(lines, start=0):
