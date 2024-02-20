@@ -38,6 +38,7 @@ jobs:
         shell: bash
        
       - name:  create copy of changed files to compare
+        working-directory: ./
         run: |
           for file in $FILES_CHANGED; do
             touch $file.compare
