@@ -34,7 +34,7 @@ jobs:
         #run: echo "FILES_CHANGED=$(git log -10 --oneline | cut -d' ' -f1)" >> $GITHUB_ENV
         #env:
         #  FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
-        run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | xargs)" >> $GITHUB_ENV
+        run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep network | xargs)" >> $GITHUB_ENV
         shell: bash
        
       - name:  create copy of changed files to compare
