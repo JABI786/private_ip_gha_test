@@ -1,4 +1,4 @@
-name: Read the content of files that were updated in the PR
+name: Read the content of files that were updated in the PR and check if any new content has a private ip address and ignore any existing ip addresses in the file
 
 #on:
 #  pull_request:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./scripts
+        working-directory: ./
 
     steps:
       - name: Checkout code
@@ -41,15 +41,18 @@ jobs:
         working-directory: ./
         run: |
           for file in $FILES_CHANGED; do
-            touch $file.compare
-            git show ${{ github.event.before }}:$file > $file.compare
-            echo $file $file.compare
+            if [[ git diff  ${{ github.event.before }} ${{ github.sha }} -- $file | grep -q "new file" ]]; then
+              touch $file.previous
+            else
+              git show ${{ github.event.before }}:$file > $file.previous
+            fi
           done 
 
-      #- name: Run pr changed files script
-      #  run: |
-      #    echo "Files changed: $FILES_CHANGED"
-      #    files=$(echo "${FILES_CHANGED}")
-      #    ./print-pr-files-changed-full.py $files
-      #    #./hello-world.py
-      #  shell: bash
+      - name: Run pr changed files script
+        working-directory: ./
+        run: |
+          echo "Files changed: $FILES_CHANGED"
+          for file in $FILES_CHANGED; do
+      #     files=$(echo "${FILES_CHANGED}")
+            ./check-for-private-ips.py $file
+        shell: bash
