@@ -1,5 +1,5 @@
 server:
-  b:
+  c:
     - '23.99.222.77'
 
 database:
