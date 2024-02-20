@@ -36,11 +36,18 @@ jobs:
         #  FILES_CHANGED: $(git diff --name-only ${{ github.event.before }} ${{ github.sha }}) 
         run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | tr '\n' ' ')" >> $GITHUB_ENV
         shell: bash
-
-      - name: Run pr changed files script
+       
+      - name:  create copy of changed files to compare
         run: |
-          echo "Files changed: $FILES_CHANGED"
-          files=$(echo "${FILES_CHANGED}")
-          ./print-pr-files-changed-full.py $files
-          #./hello-world.py
-        shell: bash
+          for file in $FILES_CHANGED; do
+            git show ${{ github.event.before }}:$file > $file.compare
+            echo $file $file.compare
+          done 
+
+      #- name: Run pr changed files script
+      #  run: |
+      #    echo "Files changed: $FILES_CHANGED"
+      #    files=$(echo "${FILES_CHANGED}")
+      #    ./print-pr-files-changed-full.py $files
+      #    #./hello-world.py
+      #  shell: bash
