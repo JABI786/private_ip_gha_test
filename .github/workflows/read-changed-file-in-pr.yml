@@ -40,7 +40,7 @@ jobs:
       - name: Run pr changed files script
         run: |
           echo "Files changed: $FILES_CHANGED"
-          files=$(echo "${FILES_CHANGED}" | tr '\n' ' ')
+          files=$(echo "${FILES_CHANGED}")
           ./print-pr-files-changed-full.py $files
           #./hello-world.py
         shell: bash
