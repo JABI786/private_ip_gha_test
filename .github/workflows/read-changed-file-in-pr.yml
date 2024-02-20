@@ -40,6 +40,7 @@ jobs:
       - name:  create copy of changed files to compare
         run: |
           for file in $FILES_CHANGED; do
+            touch $file.compare
             git show ${{ github.event.before }}:$file > $file.compare
             echo $file $file.compare
           done 
