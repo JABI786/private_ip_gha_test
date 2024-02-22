@@ -1,13 +1,9 @@
 name: Read the content of files that were updated in the PR and check if any new content has a private ip address and ignore any existing ip addresses in the file
 
-#on:
-#  pull_request:
-#    branches:
-#      - master
 on:
-  push:
+  pull_request:
     branches:
-      - testing
+      - master
 
 jobs:
   build:
@@ -28,15 +24,15 @@ jobs:
           python-version: '3.x'
 
       - name: set env variabless
-        run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep network | xargs)" >> $GITHUB_ENV
+        run: echo "FILES_CHANGED=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.sha }} | grep network | xargs)" >> $GITHUB_ENV
         shell: bash
        
       - name:  create diff containing ip adds and deletions
         working-directory: ./
         run: |
           for file in $FILES_CHANGED; do
-            git diff ${{ github.event.before }} ${{ github.sha }} --unified=0 -- $file  | grep '^+\([^+]\|$\)'  | grep -o  '\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}'  >> $file.adds
-            git diff ${{ github.event.before }} ${{ github.sha }} --unified=0 -- $file  |  grep '^-\([^-]\|$\)'  | grep -o  '\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}' >> $file.dels
+            git diff ${{ github.event.pull_request.base.sha }} ${{ github.sha }} --unified=0 -- $file  | grep '^+\([^+]\|$\)'  | grep -o  '\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}'  >> $file.adds
+            git diff ${{ github.event.pull_request.base.sha }} ${{ github.sha }} --unified=0 -- $file  |  grep '^-\([^-]\|$\)'  | grep -o  '\([0-9]\{1,3\}\.\)\{3\}[0-9]\{1,3\}' >> $file.dels
           done 
 
       - name: Run pr changed files script
