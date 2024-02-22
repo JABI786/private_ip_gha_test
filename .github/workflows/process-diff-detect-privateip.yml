@@ -1,9 +1,15 @@
 name: Read the content of files that were updated in the PR and check if any new content has a private ip address and ignore any existing ip addresses in the file
 
+#on:
+#  pull_request:
+#    branches:
+#      - main
+
 on:
-  pull_request:
+  push:
     branches:
-      - main
+      - testing
+
 
 jobs:
   build:
