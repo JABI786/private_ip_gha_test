@@ -1,4 +1,4 @@
-name: Read the content of files that were updated in the PR and check if any new content has a private ip address and ignore any existing ip addresses in the file
+name: CheckForPrivateIPsinChangesofPRstoMain
 
 on:
   pull_request:
