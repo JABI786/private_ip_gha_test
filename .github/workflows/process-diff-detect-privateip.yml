@@ -8,7 +8,7 @@ name: Read the content of files that were updated in the PR and check if any new
 on:
   push:
     branches:
-      - testing
+      - test1
 
 
 jobs:
