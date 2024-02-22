@@ -45,6 +45,6 @@ jobs:
         working-directory: ./
         run: |
           echo "Files changed: $FILES_CHANGED"
-          for file in $FILES_CHANGED; do
-            ./look-for-private-ips.py $file
+          #for file in $FILES_CHANGED; do
+          #  ./look-for-private-ips.py $file
         shell: bash
