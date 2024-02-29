@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - "network/*.sls"
-  workflow_dispatch 
 
 jobs:
   build:
