@@ -53,6 +53,5 @@ jobs:
         run: |
           echo "Files changed: $FILES_CHANGED"
           for file in $FILES_CHANGED; do
-      #     files=$(echo "${FILES_CHANGED}")
             ./check-for-private-ips.py $file
         shell: bash
