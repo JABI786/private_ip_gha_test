@@ -46,6 +46,6 @@ jobs:
         run: |
           echo "Files changed: $FILES_CHANGED"
           for file in $FILES_CHANGED; do
-            ./look-for-private-ips.py $file
+            ./detect_privateip_pr.py $file
           done
         shell: bash
