@@ -58,7 +58,6 @@ for change_data in diff_dict.values():
         add_ip = re.split(r'[-:]', added_line)[-1].strip()
         if add_ip:
             added.append(clean_ip_string(add_ip))
-    print(added)
     for j in added:
         if j not in deleted:
             if is_private_ip(j):
@@ -71,4 +70,4 @@ if private_ip_list:
         print(i)
     sys.exit(1)
 else:
-    print("All good with changes for file {changed_file}")    
+    print(f"All good with changes for file {changed_file}")    
