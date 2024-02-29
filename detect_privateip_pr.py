@@ -68,6 +68,7 @@ if private_ip_list:
     print(f"Following private ip addresses have been detected in file {changed_file}")
     for i in private_ip_list:
         print(i)
+    print("This Pull Request is adding/updating  Private IP addresses, which could be noop !!! Please check your changes ")
     sys.exit(1)
 else:
     print(f"All good with changes for file {changed_file}")    
