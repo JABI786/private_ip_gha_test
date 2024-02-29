@@ -3,7 +3,7 @@ name: PrivateIPs
 on:
   pull_request:
     branches:
-      - main
+      - master
     paths:
       - "network/*.sls"
 
